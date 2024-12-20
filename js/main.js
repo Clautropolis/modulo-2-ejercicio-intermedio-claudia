@@ -8,6 +8,7 @@
 4. Una vez hecha la comparación, mostrar el texto adecuado para la situación. (Has ganado, perdido o empate)
 5. Si me da tiempo leer los bonus
 */ 
+'use strcit';
 
 const form = document.querySelector('.js-form');
 const select = document.querySelector('.js-select');
