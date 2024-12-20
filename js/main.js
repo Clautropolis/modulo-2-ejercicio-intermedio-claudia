@@ -16,7 +16,15 @@ const papel = document.querySelector('.js-papel');
 const tijera = document.querySelector('.js-tijera');
 const btn = document.querySelector('.js-btn');
 const result = document.querySelector('.js-result');
+const jugador = document.querySelector('.js-jugador');
+const compu = document.querySelector('.js-compu');
+const reset = document.querySelector('.js-reset');
+const winnerPerson = document.querySelector('.js-winner');
+
 let selectedPlay = '';
+let contadorJugador = '';
+let contadorCompu = '';
+let click= 0;
 
 
 function randomNumber() {
@@ -58,13 +66,41 @@ function pintarResult(jugada) {
     console.log(selectedPlay);
 };
 
+function contador() {
+    if (result.innerHTML === 'Has ganado') {
+        contadorJugador++;
+        jugador.innerHTML = `Jugador: ${contadorJugador}`;
+
+    } if (result.innerHTML === 'Has perdido') {
+        contadorCompu++;
+        compu.innerHTML = `Computador: ${contadorCompu}`;
+    };
+};
+
+function winner() {
+    if (click === 10) {
+        winnerPerson.classList.remove('hidden');
+        if (contadorJugador > contadorCompu) {
+            winnerPerson.innerHTML = 'El ganador es: jugador';
+        } else if (contadorJugador < contadorCompu) {
+            winnerPerson.innerHTML = 'El ganaqdor es: computadora'
+        } else {
+            winnerPerson.innerHTML = 'Habéis quedado empate'
+        };
+        btn.classList.add('hidden');
+        reset.classList.remove('hidden');
+    };
+};
 
 function handleClick(event) {
+    click++
     event.preventDefault();
     const valueSelect = select.value;
     randomNumber();
     choosePlay();
     pintarResult(valueSelect);
-}
+    contador();
+    winner();
+};
 
 btn.addEventListener('click', handleClick);
